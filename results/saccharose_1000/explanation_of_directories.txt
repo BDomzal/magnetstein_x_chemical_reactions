@@ -1,0 +1,13 @@
+Explanation of what is kept in directories:
+
+1) cut_spectra_of_components_from_mixture_cut_spectra_of_mixture
+-> Results for input: data/saccharose1000/preprocessed_mixture.csv, data/saccharose1000/preprocessed_saccharose_from_mixture.csv, data/saccharose1000/preprocessed_glucose_from_mixture.csv, data/saccharose1000/preprocessed_fructose_from_mixture.csv
+
+2) cut_spectra_of_components_from_mixture_full_spectra_of_mixture
+-> Results for input: data/saccharose1000/all.csv, data/saccharose1000/preprocessed_saccharose_from_mixture.csv, data/saccharose1000/preprocessed_glucose_from_mixture.csv, data/saccharose1000/preprocessed_fructose_from_mixture.csv
+
+3) cut_spectra_of_components_from_separate_files_full_spectra_of_mixture
+-> Results for input: data/saccharose1000/all.csv, data/saccharose1000/preprocessed_saccharose.csv, data/saccharose1000/preprocessed_glucose.csv, data/saccharose1000/preprocessed_fructose.csv
+
+4) full_spectra_of_components_from_separate_files_full_spectra_of_mixture
+-> Results for input: data/saccharose1000/all.csv, data/saccharose1000/sucrose.csv, data/saccharose1000/glucose.csv, data/saccharose1000/fructose.csv
