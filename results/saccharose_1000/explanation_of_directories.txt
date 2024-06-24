@@ -2,6 +2,7 @@ Explanation of what is kept in directories:
 
 1) cut_spectra_of_components_from_mixture_cut_spectra_of_mixture
 -> Results for input: data/saccharose1000/preprocessed_mixture.csv, data/saccharose1000/preprocessed_saccharose_from_mixture.csv, data/saccharose1000/preprocessed_glucose_from_mixture.csv, data/saccharose1000/preprocessed_fructose_from_mixture.csv
+Additionally, the baseline was corrected in mixture! (See notebooks/preprocessing/Saccharose_hydrolysis_preprocessing.ipynb).
 
 2) cut_spectra_of_components_from_mixture_full_spectra_of_mixture
 -> Results for input: data/saccharose1000/all.csv, data/saccharose1000/preprocessed_saccharose_from_mixture.csv, data/saccharose1000/preprocessed_glucose_from_mixture.csv, data/saccharose1000/preprocessed_fructose_from_mixture.csv
