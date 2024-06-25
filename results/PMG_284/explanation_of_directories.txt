@@ -1,0 +1,14 @@
+Explanation of what is kept in directories:
+
+1) cut_spectra_of_components_first_version_full_spectra_of_mixture
+-> Results for input: data/PMG_284/preprocessed_substrate0.csv, data/PMG_284/preprocessed_substrate1.csv, data/PMG_284/preprocessed_product.csv, /data/PMG_284/seria1.csv
+
+2) cut_spectra_of_components_second_version_full_spectra_of_mixture
+-> Results for input: data/PMG_284/preprocessed_substrate0_version2.csv, data/PMG_284/preprocessed_substrate1_version2.csv, data/PMG_284/preprocessed_product_version2.csv, /data/PMG_284/seria1.csv
+
+3) cut_spectra_of_components_third_version_cut_spectra_of_mixture
+-> Results for input: data/PMG_284/preprocessed_substrate0_version3.csv, data/PMG_284/preprocessed_substrate1_version3.csv, data/PMG_284/preprocessed_product_version3.csv, /data/PMG_284/preprocessed_mixture_version3.csv
+For version 3, spectra are reduced to regions:   
+(5.302060, 5.596931) Y15 2-pentene
+(3.598789, 3.920281) Y11 triethylsilane
+(0.814595, 0.889757) Y1 product
