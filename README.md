@@ -3,11 +3,11 @@
 
 This repository contains the code for the analysis of chemical reaction kinetics using nuclear magnetic resonance (NMR) spectra and the Magnetstein algorithm. 
 
-Magnetstein is available [here](https://github.com/BDomzal/magnetstein). 
+Magnetstein is available [here](https://github.com/BDomzal/magnetstein). To be able to use all the functionalities dedicated for the analysis of chemical reactions, make sure that you set branch to initial_proportions.
 
 # Data
 
-Due to the large size of the input data, they are not stored in this repository. The data are available [here](linktozenodo). 
+Due to the large size of the input data, they are not stored in this repository. The data are available [here](https://zenodo.org/records/14814657). The data folder should be stored as magnetstein_x_chemical_reactions/data to ensure that all the paths are correct.
 
 # Code 
 
