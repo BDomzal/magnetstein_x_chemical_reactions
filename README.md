@@ -11,7 +11,7 @@ Due to the large size of the input data, they are not stored in this repository.
 
 # Code 
 
-The code used for preprocessing, analysis and visualisations is available in notebooks/.
+The code used for preprocessing, analysis and visualisations is available in notebooks/. To reproduce the analysis (without warm-start), use notebooks/estimation.ipynb. To run the analysis with warm-start, use notebooks/estimation_with_warm_start.ipynb.
 
 # Results
 
