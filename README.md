@@ -5,6 +5,10 @@ This repository contains the code for the analysis of chemical reaction kinetics
 
 Magnetstein is available [here](https://github.com/BDomzal/magnetstein). To be able to use all the functionalities dedicated for the analysis of chemical reactions, make sure that you set branch to initial_proportions.
 
+# Prerequisites
+
+To be able to run the code from this repository, set your environment as in requirements.txt file. We also strongly recommend installing [Gurobi](https://www.gurobi.com/) and using it as a solver in the analysis.
+
 # Data
 
 Due to the large size of the input data, they are not stored in this repository. The data are available [here](https://zenodo.org/records/14814657). The data folder should be stored as magnetstein_x_chemical_reactions/data to ensure that all the paths are correct.
