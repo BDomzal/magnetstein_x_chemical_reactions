@@ -16,7 +16,7 @@ The method should be used when:
 - lineshapes are distorted,
 - there are contaminations and/or noise.
   
-In such circumstances, the Magnetstein algorithm gains an advantage over the traditional integration methods due to the special properties of the Wasserstein metric that is the core concept of the method. The metric makes the algorithm robust to changes in peaks' locations and shapes, and to ambiguity in assigning signal to particular reagents due to overlap. The additional refinements make it possible to remove noise from the data.
+In such circumstances, the Magnetstein algorithm gains an advantage over the traditional integration methods due to the special properties of the Wasserstein metric that is the core concept of the method. The metric makes the algorithm robust to changes in peaks' locations and shapes, and to ambiguity in assigning signal to particular reagents due to overlap. The additional refinements make it possible for the algorithm to remove noise from the data.
 
 #### What to use as an input
 
@@ -27,11 +27,21 @@ The input should consist of the two crucial parts:
 
 #### How to interpret and set the values of the parameters
 
-The user needs to define the values of two parameters: $\kappa_{mixture}$ and $\kappa_{components}$. These are so-called *denoising penalties* that can be interpreted as soft tolerance thresholds for shifting of the signal along the horizontal axis for the spectrum of the reaction mixture and for the spectra in the library, respectively.
+The user needs to define the values of two parameters: $\kappa_{mixture}$ and $\kappa_{components}$. These are so-called *denoising penalties* that can be interpreted as soft tolerance thresholds for shifting of the signal along the horizontal axis for the spectrum of the reaction mixture and for the spectra in the library, respectively. Another interpretation is viewing $\kappa_{mixture}$ as a certain measure of reliability of the mixture's spectrum. The higher its value, the less likely the algorithm is to remove noise from the spectrum. Similarly, $\kappa_{components}$ reflects our confidence in the purity of the spectra in the library.
+
+If you are unsure about how to set the parameters, we recommend using the default values, i.e. $\kappa_{mixture}=0.25$ and $\kappa_{components}=0.22$. We checked experimentally that such settings produced accurate results for many datasets.
 
 #### How to interpret the output
 
+The main output of the algorithm is the series of vectors indexed by time:
+
+$$p_t = \Big(p_{1,t}, p_{2,t}, \dots, p_{k,t}\Big),$$
+
+where $p_{i,t}$ is the *proportion* of the $i$-th reagent in the reaction mixture. By *proportions* here we mean the relative amounts of reagents. Note that $p_{1,t} + p_{2,t} + \dots + p_{k,t}$ does not necessarily equal to 1 due to the presence of noise and contamination. The quantity $p_{0,t} := 1 - p_{1,t} - p_{2,t} - \dots - p_{k,t}$ is the Magnetstein's estimation of the relative amount of the signal coming from the contamination in the reaction mixture's spectrum. Similarly, the quantity $p_{0,t}'$, also returned by the algorithm, is the Magnestein's estimation of the relative amount of the signal coming from the contamination in the library.
+
 #### How to report the results
+
+In order to make the results reproducable, one needs to provide: 1) input data, i.e. series of spectra of the reaction mixture indexed by time, and the library; 2) information about the parameters settings, i.e. chosen values of $\kappa_{mixture}$ and $\kappa_{components}$. This is enough to rerun the analysis.
 
 ## About the repository
 
