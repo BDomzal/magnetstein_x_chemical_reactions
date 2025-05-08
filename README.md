@@ -37,11 +37,11 @@ The main output of the algorithm is the series of vectors indexed by time:
 
 $$p_t = \Big(p_{1,t}, p_{2,t}, \dots, p_{k,t}\Big),$$
 
-where $p_{i,t}$ is the *proportion* of the $i$-th reagent in the reaction mixture. By *proportions* here we mean the relative amounts of reagents. Note that $p_{1,t} + p_{2,t} + \dots + p_{k,t}$ does not necessarily equal to 1 due to the presence of noise and contamination. The quantity $p_{0,t} := 1 - p_{1,t} - p_{2,t} - \dots - p_{k,t}$ is the Magnetstein's estimation of the relative amount of the signal coming from the contamination in the reaction mixture's spectrum. Similarly, the quantity $p_{0,t}'$, also returned by the algorithm, is the Magnestein's estimation of the relative amount of the signal coming from the contamination in the library.
+where $p_{i,t}$ is the *proportion* of the $i$-th reagent in the reaction mixture. By *proportions* here we mean the relative amounts of reagents. Note that $p_{1,t} + p_{2,t} + \dots + p_{k,t}$ does not necessarily equal to 1 due to the presence of noise and contamination. The quantity $p_{0,t} := 1 - p_{1,t} - p_{2,t} - \dots - p_{k,t}$ is Magnetstein's estimation of the relative amount of the signal coming from the contamination in the reaction mixture's spectrum. Similarly, the quantity $p_{0,t}'$, also returned by the algorithm, is the Magnestein's estimation of the relative amount of the signal coming from the contamination in the library.
 
 #### How to report the results
 
-In order to make the results reproducable, one needs to provide: 1) input data, i.e. series of spectra of the reaction mixture indexed by time, and the library; 2) information about the parameters settings, i.e. chosen values of $\kappa_{mixture}$ and $\kappa_{components}$. This is enough to rerun the analysis.
+In order to make the results reproducible, one needs to provide: 1) input data, i.e. series of spectra of the reaction mixture indexed by time, and the library; 2) information about the parameters settings, i.e. chosen values of $\kappa_{mixture}$ and $\kappa_{components}$. This is enough to rerun the analysis.
 
 ## About the repository
 
