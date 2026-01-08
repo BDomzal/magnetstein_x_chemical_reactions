@@ -1,0 +1,170 @@
+{
+
+"magnetstein_path" : "/home/basia/Documents/spectroscopy/magnetstein",
+
+"mixture_paths" : {
+		        "Saccharose hydrolysis": "../data/saccharose_hydrolysis/preprocessed_mixture.csv",
+		        "PMG 284 monitoring": "../data/PMG_284/preprocessed_mixture.csv",
+		        "PMG 287 monitoring": "../data/PMG_287/preprocessed_mixture_cut_to_regions.csv",
+		        "Saccharose hydrolysis with full mixture spectrum": "../data/saccharose_hydrolysis_full_mixture_spectrum/preprocessed_mixture.csv",
+		        "PMG 284 monitoring with full mixture spectrum": "../data/PMG_284_full_mixture_spectrum/preprocessed_mixture_whole.csv",
+		        "PMG 287 monitoring with full mixture spectrum": "../data/PMG_287_full_mixture_spectrum/preprocessed_mixture_whole.csv"
+		        },
+
+"reagents_paths" : {
+		        "Saccharose hydrolysis": ["../data/saccharose_hydrolysis/preprocessed_saccharose.csv", 
+		                                    "../data/saccharose_hydrolysis/preprocessed_alpha_glucose.csv",
+		                                    "../data/saccharose_hydrolysis/preprocessed_beta_glucose.csv",
+		                                    "../data/saccharose_hydrolysis/preprocessed_fructose.csv"],
+		        "PMG 284 monitoring": ["../data/PMG_284/preprocessed_pentene.csv",
+		                              "../data/PMG_284/preprocessed_triethylsilane.csv",
+		                              "../data/PMG_284/preprocessed_product.csv"],
+		        "PMG 287 monitoring": ["../data/PMG_287/preprocessed_hexene.csv",
+		                              "../data/PMG_287/preprocessed_triethylsilane.csv",
+		                              "../data/PMG_287/preprocessed_product.csv"],
+		        "Saccharose hydrolysis with full mixture spectrum": [
+		                                    "../data/saccharose_hydrolysis_full_mixture_spectrum/preprocessed_saccharose.csv", 
+		                                    "../data/saccharose_hydrolysis_full_mixture_spectrum/preprocessed_alpha_glucose.csv",
+		                                    "../data/saccharose_hydrolysis_full_mixture_spectrum/preprocessed_beta_glucose.csv",
+		                                    "../data/saccharose_hydrolysis_full_mixture_spectrum/preprocessed_fructose.csv"],
+		        "PMG 284 monitoring with full mixture spectrum" : ["../data/PMG_284_full_mixture_spectrum/preprocessed_pentene.csv",
+		                                                          "../data/PMG_284_full_mixture_spectrum/preprocessed_triethylsilane.csv",
+		                                                          "../data/PMG_284_full_mixture_spectrum/preprocessed_product.csv"],
+	    
+		        "PMG 287 monitoring with full mixture spectrum": ["../data/PMG_287_full_mixture_spectrum/preprocessed_hexene.csv",
+		                                                          "../data/PMG_287_full_mixture_spectrum/preprocessed_triethylsilane.csv",
+		                                                          "../data/PMG_287_full_mixture_spectrum/preprocessed_product.csv"]
+		},
+
+"mixture_separators" : {
+                        "Saccharose hydrolysis": "\t",
+                        "PMG 284 monitoring": "\t",
+                        "PMG 287 monitoring": "\t",
+                        "Saccharose hydrolysis with full mixture spectrum": "\t",
+                        "PMG 284 monitoring with full mixture spectrum": "\t",
+                        "PMG 287 monitoring with full mixture spectrum": "\t"
+                        },
+
+"reagents_separators" : {
+		        "Saccharose hydrolysis": "\t",
+		        "PMG 284 monitoring": "\t",
+		        "PMG 287 monitoring": "\t",
+		        "Saccharose hydrolysis with full mixture spectrum": "\t",
+		        "PMG 284 monitoring with full mixture spectrum": "\t",
+		        "PMG 287 monitoring with full mixture spectrum": "\t"
+		        },
+
+"results_paths" : {
+                "Saccharose hydrolysis": "../results/saccharose_hydrolysis/",
+                "PMG 284 monitoring": "../results/PMG_284/",
+                "PMG 287 monitoring": "../results/PMG_287/",
+                "Saccharose hydrolysis with full mixture spectrum": "../results/saccharose_hydrolysis_full_mixture_spectrum/",
+                "PMG 284 monitoring with full mixture spectrum": "../results/PMG_284_full_mixture_spectrum/",
+                "PMG 287 monitoring with full mixture spectrum": "../results/PMG_287_full_mixture_spectrum/"
+                },
+                
+"mixture_paths_int" : {
+			"Saccharose hydrolysis": "../data/saccharose_hydrolysis/sucrose_better_baseline_constant_region_sizes.csv",
+		        "PMG 284 monitoring": "../data/PMG_284/284_edited_corrected.csv",
+		        "PMG 287 monitoring": "../data/PMG_287/preprocessed_mixture_whole.csv" 
+		        },
+
+"python_integrals_paths" : {
+			"Saccharose hydrolysis": "../python_integrals/",
+                        "PMG 284 monitoring": "../python_integrals/",
+                        "PMG 287 monitoring": "../python_integrals/"
+                        },
+
+"substances_names" : {
+			"Saccharose hydrolysis": ["saccharose", "alpha-glucose", "beta-glucose", "fructose"],
+			"PMG 284 monitoring": ["2-pentene", "triethylsilane", "products"],
+			"PMG 287 monitoring": ["1-hexene", "triethylsilane", "product"]
+                   },
+
+"integration_intervals" : {
+			"Saccharose hydrolysis": [[5.39173, 5.44305], [5.2178, 5.26134], 
+                                                   [4.62026, 4.67207], [3.97917, 4.01542]],
+			"PMG 284 monitoring": [[5.3, 5.6], [3.6, 3.95],
+                                           [1.16, 1.36]],
+			"PMG 287 monitoring": [[3.599926, 3.679897],
+                                            [4.079348, 4.129027], 
+                                            [4.668059, 4.857709], 
+                                            [7.616258, 7.838666], 
+                                            [8.440374, 8.647265],
+
+                                            [3.343730, 3.406997],
+                                            [3.756886, 3.832615], 
+                                            [6.422073, 6.564104],
+
+                                            [3.256018, 3.343730],
+                                            [3.681636, 3.722376], 
+                                            [3.722376, 3.756886],
+                                            [3.994139, 4.078496]
+                                          ]
+                   	},
+                   	
+"sucrose_time_axis_path" : "../data/saccharose_hydrolysis/time_axis_sucrose_hydrolysis.txt",
+
+"substances_names_for_visualisations" : {
+						"Saccharose hydrolysis": ["sucrose", "alpha-glucose", "beta-glucose", "fructose"],
+					    "PMG 284 monitoring": ["2-pentene", "triethylsilane", "2-pentyl-1-triethylsilane"],
+					    "PMG 287 monitoring": ["1-hexene", "triethylsilane", "hexyl-triethylsilane"],
+					    "Saccharose hydrolysis with full mixture spectrum": ["sucrose", "alpha-glucose", "beta-glucose", "fructose"],
+					    "PMG 284 monitoring with full mixture spectrum": ["2-pentene", "triethylsilane", "2-pentyl-1-triethylsilane"],
+					    "PMG 287 monitoring with full mixture spectrum": ["1-hexene", "triethylsilane", "hexyl-triethylsilane"]
+					    },
+
+"integrals_to_compare_with" : {
+				"Saccharose hydrolysis": "../mnova_integrals/sacharoza_calki_nowe.csv",
+		            "PMG 284 monitoring": "../mnova_integrals/284_edited_corrected_calki.csv",
+		            "PMG 287 monitoring": "../mnova_integrals/287_calki_zsumowane.csv",
+		            "Saccharose hydrolysis with full mixture spectrum": "../mnova_integrals/sacharoza_calki_nowe.csv",
+		            "PMG 284 monitoring with full mixture spectrum": "../mnova_integrals/284_edited_corrected_calki.csv",
+		            "PMG 287 monitoring with full mixture spectrum": "../mnova_integrals/287_calki_zsumowane.csv"
+		                    },
+
+"integrals_separators" : {
+			"Saccharose hydrolysis": "\t",
+                    "PMG 284 monitoring": ",",
+                    "PMG 287 monitoring": ";",
+                    "Saccharose hydrolysis with full mixture spectrum": "\t",
+                    "PMG 284 monitoring with full mixture spectrum": ",",
+                    "PMG 287 monitoring with full mixture spectrum": ";"
+                            },
+
+"python_integrals_to_compare_with" : {
+					"Saccharose hydrolysis": "../python_integrals/python_integral_Saccharose_hydrolysis.csv",
+				    "PMG 284 monitoring": "../python_integrals/python_integral_PMG_284_monitoring.csv",
+				    "PMG 287 monitoring": "../python_integrals/python_integral_PMG_287_monitoring.csv",
+				    "Saccharose hydrolysis with full mixture spectrum": "../python_integrals/python_integral_Saccharose_hydrolysis.csv",
+				    "PMG 284 monitoring with full mixture spectrum": "../python_integrals/python_integral_PMG_284_monitoring.csv",
+				    "PMG 287 monitoring with full mixture spectrum": "../python_integrals/python_integral_PMG_287_monitoring.csv"
+                                    },
+
+"python_integrals_separators" : {
+			"Saccharose hydrolysis": ",",
+                    "PMG 284 monitoring": ",",
+                    "PMG 287 monitoring": ",",
+                    "Saccharose hydrolysis with full mixture spectrum": ",",
+                    "PMG 284 monitoring with full mixture spectrum": ",",
+                    "PMG 287 monitoring with full mixture spectrum": ","
+                            },
+
+"colors_for_components" : {
+			"Saccharose hydrolysis": ["#f5cacc", "#e2eac4", "#c0f5ce", "#c4f1ef"],
+                         "PMG 284 monitoring": ["#f5cacc", "#e2eac4", "#c0f5ce"],
+                        "PMG 287 monitoring": ["#decdee", "#eed5cd", "#cdeeee"],
+                         "Saccharose hydrolysis with full mixture spectrum": ["#f5cacc", "#e2eac4", "#c0f5ce", "#c4f1ef"],
+                         "PMG 284 monitoring with full mixture spectrum": ["#f5cacc", "#e2eac4", "#c0f5ce"],
+                         "PMG 287 monitoring with full mixture spectrum": ["#decdee", "#eed5cd", "#cdeeee"]
+                        },
+
+"saturated_colors_for_components" : {"Saccharose hydrolysis": ["#e07676", "#b3ba97", "#88c398", "#2bbcb7"],
+                         "PMG 284 monitoring": ["#e07676", "#b3ba97", "#88c398"],
+                        "PMG 287 monitoring": ["#a06fce", "#cb8067", "#67cbcb"],
+                        "Saccharose hydrolysis with full mixture spectrum": ["#e07676", "#b3ba97", "#88c398", "#2bbcb7"],
+                         "PMG 284 monitoring with full mixture spectrum": ["#e07676", "#b3ba97", "#88c398"],
+                        "PMG 287 monitoring with full mixture spectrum": ["#a06fce", "#cb8067", "#67cbcb"]
+                        }
+
+}
