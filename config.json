@@ -68,6 +68,14 @@
 		        "PMG 284 monitoring": "../data/PMG_284/284_edited_corrected.csv",
 		        "PMG 287 monitoring": "../data/PMG_287/preprocessed_mixture_whole.csv" 
 		        },
+		        
+"integrals_path" : {
+			"Saccharose hydrolysis": "../../mnova_integrals/sucrose_better_baseline_constant_region_sizes_calki.csv"
+			},
+			
+"output_path" : {
+			"Saccharose hydrolysis": "../../mnova_integrals/"
+			},
 
 "python_integrals_paths" : {
 			"Saccharose hydrolysis": "../python_integrals/",
@@ -122,6 +130,10 @@
 		            "PMG 284 monitoring with full mixture spectrum": "../mnova_integrals/284_edited_corrected_calki.csv",
 		            "PMG 287 monitoring with full mixture spectrum": "../mnova_integrals/287_calki_zsumowane.csv"
 		                    },
+
+"raw_integrals_separators" : {
+			"Saccharose hydrolysis": ","
+                            },
 
 "integrals_separators" : {
 			"Saccharose hydrolysis": "\t",
