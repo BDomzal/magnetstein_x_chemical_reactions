@@ -10,6 +10,10 @@
 		        "PMG 284 monitoring with full mixture spectrum": "../data/PMG_284_full_mixture_spectrum/preprocessed_mixture_whole.csv",
 		        "PMG 287 monitoring with full mixture spectrum": "../data/PMG_287_full_mixture_spectrum/preprocessed_mixture_whole.csv"
 		        },
+		        
+"raw_mixture_paths" : {
+		        "Saccharose hydrolysis": "../../data/saccharose_hydrolysis/sucrose_better_baseline_constant_region_sizes.csv"
+		        },
 
 "reagents_paths" : {
 		        "Saccharose hydrolysis": ["../data/saccharose_hydrolysis/preprocessed_saccharose.csv", 
@@ -53,6 +57,10 @@
 		        "PMG 284 monitoring with full mixture spectrum": "\t",
 		        "PMG 287 monitoring with full mixture spectrum": "\t"
 		        },
+		        
+"preprocessing_output_path" : {
+				"Saccharose hydrolysis": "../../data/saccharose_hydrolysis/"
+				},
 
 "results_paths" : {
                 "Saccharose hydrolysis": "../results/saccharose_hydrolysis/",
