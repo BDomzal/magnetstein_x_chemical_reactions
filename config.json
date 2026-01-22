@@ -12,7 +12,9 @@
 		        },
 		        
 "raw_mixture_paths" : {
-		        "Saccharose hydrolysis": "../../data/saccharose_hydrolysis/sucrose_better_baseline_constant_region_sizes.csv"
+		        "Saccharose hydrolysis": "../../data/saccharose_hydrolysis/sucrose_better_baseline_constant_region_sizes.csv",
+		        "Saccharose hydrolysis with full mixture spectrum": "../../data/saccharose_hydrolysis_full_mixture_spectrum/sucrose_better_baseline_constant_region_sizes_full_mixture_spectrum.csv"
+
 		        },
 
 "reagents_paths" : {
@@ -59,7 +61,8 @@
 		        },
 		        
 "preprocessing_output_path" : {
-				"Saccharose hydrolysis": "../../data/saccharose_hydrolysis/"
+				"Saccharose hydrolysis": "../../data/saccharose_hydrolysis/",
+				"Saccharose hydrolysis with full mixture spectrum": "../../data/saccharose_hydrolysis_full_mixture_spectrum/"
 				},
 
 "results_paths" : {
@@ -116,7 +119,9 @@
                                             [3.681636, 3.722376], 
                                             [3.722376, 3.756886],
                                             [3.994139, 4.078496]
-                                          ]
+                                          ],
+                        "Saccharose hydrolysis with full mixture spectrum": [[5.39173, 5.44305], [5.2178, 5.26134], 
+                                                   				[4.62026, 4.67207], [3.97917, 4.01542]]
                    	},
                    	
 "sucrose_time_axis_path" : "../data/saccharose_hydrolysis/time_axis_sucrose_hydrolysis.txt",
