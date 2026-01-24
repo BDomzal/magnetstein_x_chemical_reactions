@@ -14,8 +14,10 @@
 "raw_mixture_paths" : {
 		        "Saccharose hydrolysis": "../../data/saccharose_hydrolysis/sucrose_better_baseline_constant_region_sizes.csv",
 		        "PMG 284 monitoring": "../../data/PMG_284/284_edited_corrected.csv",
+		        "PMG 287 monitoring": "../../data/PMG_287/PMG_287_seria1.csv", 
 		        "Saccharose hydrolysis with full mixture spectrum": "../../data/saccharose_hydrolysis_full_mixture_spectrum/sucrose_better_baseline_constant_region_sizes_full_mixture_spectrum.csv",
-		        "PMG 284 monitoring with full mixture spectrum": "../../data/PMG_284_full_mixture_spectrum/284_edited_corrected_no_cut.csv"
+		        "PMG 284 monitoring with full mixture spectrum": "../../data/PMG_284_full_mixture_spectrum/284_edited_corrected_no_cut.csv",
+		        "PMG 287 monitoring with full mixture spectrum": "../../data/PMG_287_full_mixture_spectrum/PMG_287_seria1.csv"
 		        },
 		        
 "mixture_to_extract_reagents_spectra" : {
@@ -73,8 +75,10 @@
 "preprocessing_output_path" : {
 				"Saccharose hydrolysis": "../../data/saccharose_hydrolysis/",
 				"PMG 284 monitoring": "../../data/PMG_284/",
+				"PMG 287 monitoring": "../../data/PMG_287/",
 				"Saccharose hydrolysis with full mixture spectrum": "../../data/saccharose_hydrolysis_full_mixture_spectrum/",
-				"PMG 284 monitoring with full mixture spectrum": "../../data/PMG_284_full_mixture_spectrum/"
+				"PMG 284 monitoring with full mixture spectrum": "../../data/PMG_284_full_mixture_spectrum/",
+				"PMG 287 monitoring with full mixture spectrum": "../../data/PMG_287_full_mixture_spectrum/"
 				},
 
 "results_paths" : {
@@ -135,8 +139,25 @@
                         "Saccharose hydrolysis with full mixture spectrum": [[5.39173, 5.44305], [5.2178, 5.26134], 
                                                    				[4.62026, 4.67207], [3.97917, 4.01542]],
                         "PMG 284 monitoring with full mixture spectrum": [[5.3, 5.6], [3.6, 3.95],
-                                           [1.16, 1.36]]
+                                           [1.16, 1.36]],
+                        "PMG 287 monitoring with full mixture spectrum": [[3.599926, 3.679897],
+                                            [4.079348, 4.129027], 
+                                            [4.668059, 4.857709], 
+                                            [7.616258, 7.838666], 
+                                            [8.440374, 8.647265],
+
+                                            [3.343730, 3.406997],
+                                            [3.756886, 3.832615], 
+                                            [6.422073, 6.564104],
+
+                                            [3.256018, 3.343730],
+                                            [3.681636, 3.722376], 
+                                            [3.722376, 3.756886],
+                                            [3.994139, 4.078496]
+                                          ]
                    	},
+                   	
+"full_ppm_interval_PMG_287" : [2.952301, 10.387961],
                    	
 "sucrose_time_axis_path" : "../data/saccharose_hydrolysis/time_axis_sucrose_hydrolysis.txt",
 
