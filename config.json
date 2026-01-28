@@ -2,6 +2,8 @@
 
 "magnetstein_path" : "/home/basia/Documents/spectroscopy/magnetstein",
 
+"src_path" : "/home/basia/Documents/reactions_project/src", 
+
 "mixture_paths" : {
 		        "Saccharose hydrolysis": "../data/saccharose_hydrolysis/preprocessed_mixture.csv",
 		        "PMG 284 monitoring": "../data/PMG_284/preprocessed_mixture.csv",
