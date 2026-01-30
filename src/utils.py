@@ -234,3 +234,4 @@ def create_incomplete_library_figure(proportions_in_times, time_range, substance
             plt.savefig(results_path + 'all_components_kappa_'+str(kappa)+'_'+str(kappa_th)+'.png')
         else:
             plt.savefig(results_path + 'removed_component_'+str(which_reagent_to_remove)+'_kappa_'+str(kappa)+'_'+str(kappa_th)+'.png')
+    plt.clf()
