@@ -38,15 +38,6 @@ reagent0 = create_reagent_spectrum_v2(mixture_time_data, MIXTURE_TO_EXTRACT_REAG
 reagent1 = create_reagent_spectrum_v2(mixture_time_data, MIXTURE_TO_EXTRACT_REAGENTS_SPECTRA, [INTEGRATION_INTERVALS[1]])
 reagent2 = create_reagent_spectrum_v2(mixture_time_data, MIXTURE_TO_EXTRACT_REAGENTS_SPECTRA, [INTEGRATION_INTERVALS[2]])
 reagent3 = create_reagent_spectrum_v2(mixture_time_data, MIXTURE_TO_EXTRACT_REAGENTS_SPECTRA, [INTEGRATION_INTERVALS[3]])
-# reagents_sp = [reagent0, reagent1, reagent2, reagent3]
-
-# for sp in reagents_sp:
-#     sp.trim_negative_intensities()
-#     sp.normalize()
-# reagent0.normalize()
-# reagent1.normalize()
-# reagent2.normalize()
-# reagent3.normalize()
 
 mixture_time_data = cut_mixture_time_data_to_regions_v2(mixture_time_data, INTEGRATION_INTERVALS)
 
@@ -85,12 +76,6 @@ reagent0 = create_reagent_spectrum_v2(mixture_time_data, MIXTURE_TO_EXTRACT_REAG
 reagent1 = create_reagent_spectrum_v2(mixture_time_data, MIXTURE_TO_EXTRACT_REAGENTS_SPECTRA, [INTEGRATION_INTERVALS[1]])
 reagent2 = create_reagent_spectrum_v2(mixture_time_data, MIXTURE_TO_EXTRACT_REAGENTS_SPECTRA, [INTEGRATION_INTERVALS[2]])
 reagent3 = create_reagent_spectrum_v2(mixture_time_data, MIXTURE_TO_EXTRACT_REAGENTS_SPECTRA, [INTEGRATION_INTERVALS[3]])
-# reagents_sp = [reagent0, reagent1, reagent2, reagent3]
-
-
-# for sp in reagents_sp:
-#     sp.trim_negative_intensities()
-#     sp.normalize()
 
 
 #baseline correction
