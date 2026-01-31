@@ -236,6 +236,8 @@
 					"Saccharose hydrolysis with full mixture spectrum": "../../results/additional_analysis/incomplete_library/saccharose_hydrolysis_full_mixture_spectrum/",
 					"PMG 284 monitoring with full mixture spectrum": "../../results/additional_analysis/incomplete_library/PMG_284_full_mixture_spectrum/",
 					"PMG 287 monitoring with full mixture spectrum": "../../results/additional_analysis/incomplete_library/PMG_287_full_mixture_spectrum/"
-					}
+					},
+					
+"additional_analysis_results_paths_overlapping_simulations" : "../../results/additional_analysis/overlapping_simulations/"
 
 }

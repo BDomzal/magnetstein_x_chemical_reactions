@@ -5,6 +5,8 @@ from masserstein import NMRSpectrum, estimate_proportions, estimate_proportions_
 import pulp
 import time
 from textwrap import wrap
+from scipy.stats import cauchy
+import math
 
 def load_spectrum(mixture_time_data, moment_of_time):
     ppm = mixture_time_data['ppm']
@@ -235,3 +237,130 @@ def create_incomplete_library_figure(proportions_in_times, time_range, substance
         else:
             plt.savefig(results_path + 'removed_component_'+str(which_reagent_to_remove)+'_kappa_'+str(kappa)+'_'+str(kappa_th)+'.png')
     plt.clf()
+
+
+def add_in_proportion(main_peak, small_peak, chemical_shift_axis, small_peak_proportion):
+    
+    component_0 = NMRSpectrum(confs = list(zip(chemical_shift_axis, main_peak)))
+    component_0.normalize()
+    
+    component_1 = NMRSpectrum(confs = list(zip(chemical_shift_axis, small_peak)))
+    component_1.normalize(small_peak_proportion / (1 + small_peak_proportion))
+    
+    result_intensities = np.array(component_0.confs)[:,1] + np.array(component_1.confs)[:,1]
+    result = NMRSpectrum(confs = list(zip(chemical_shift_axis, result_intensities)))
+    result.normalize()
+    
+    return result
+
+
+def second_peak_location(overlap_proportion, first_peak_position, scale):
+    return 2*scale*np.tan((math.pi*0.5)*(1-overlap_proportion)) + first_peak_position
+
+
+def create_second_peak(overlap_proportion, first_peak_position, scale, chemical_shift_axis):
+
+    loc = second_peak_location(overlap_proportion, first_peak_position, scale)
+    second_peak = cauchy.pdf(np.array(chemical_shift_axis), 
+                                        loc = loc, 
+                                        scale = scale)
+    res = NMRSpectrum(confs=list(zip(chemical_shift_axis, second_peak)))
+    res.normalize()
+    return loc, res
+
+
+def create_mixture(component_0, component_1, ground_truth_proportions, shift=0):
+    
+    assert np.all(np.array(component_0.confs)[:,0] == np.array(component_1.confs)[:,0])
+    chemical_shift_axis = np.array(component_0.confs)[:,0] + shift
+    
+    component_0_intensities = np.array(component_0.confs)[:,1]
+    component_1_intensities = np.array(component_1.confs)[:,1]
+    mixture_intensities = ground_truth_proportions[0]*component_0_intensities + ground_truth_proportions[1]*component_1_intensities
+    mixture = NMRSpectrum(confs=list(zip(chemical_shift_axis, mixture_intensities)))
+    mixture.normalize()
+    
+    return mixture
+
+def run_overlapping_simulations(overlap_proportion, shift, chemical_shift_axis, 
+                                first_peak_position, small_peak_position,
+                                small_peak_proportion, scale, shift_diff, 
+                                ground_truth_proportions, results_path):
+
+    abs_error_df = pd.DataFrame(index=overlap_proportion, columns=shift)
+
+    for op in overlap_proportion:
+        for sh in shift:
+            print('------------------------------')
+            print('Overlap proportion: ' + str(op))
+            print('Shift: ' + str(sh))
+
+            #Creating components
+            first_peak = cauchy.pdf(np.array(chemical_shift_axis), 
+                                            loc = first_peak_position, 
+                                            scale = scale)
+            small_peak = cauchy.pdf(np.array(chemical_shift_axis), 
+                                            loc = small_peak_position, 
+                                            scale = scale)
+
+            component_0 = add_in_proportion(first_peak, small_peak, chemical_shift_axis, small_peak_proportion)
+
+            second_peak_position, component_1 = create_second_peak(op, first_peak_position, scale, chemical_shift_axis)
+
+            #Creating mixture
+            mixture = create_mixture(component_0, component_1, ground_truth_proportions, sh)
+
+            #Cutting out library from the mixture
+            where_to_cut = (second_peak_position + first_peak_position)/2
+            component_0_confs = [(pos, intensity) for pos, intensity in mixture.confs if pos<where_to_cut]
+            component_1_confs = [(pos, intensity) for pos, intensity in mixture.confs if pos>where_to_cut]
+            component_0 = NMRSpectrum(confs = component_0_confs)
+            component_0.normalize()
+            component_1 = NMRSpectrum(confs = component_1_confs)
+            component_1.normalize()
+
+            #Estimation
+            estimation = estimate_proportions(mixture, [component_0, component_1], what_to_compare='area', 
+                                          solver=pulp.GUROBI(msg=False),
+                                         #MTD=sh+shift_diff, MTD_th=sh+shift_diff)
+                                            MTD=0.25, MTD_th=0.22)
+                                              
+            abs_err = sum([abs(el-gt) for el, gt in zip(estimation['proportions'], ground_truth_proportions)])
+            print(estimation['proportions'])
+            
+            abs_error_df.loc[op, sh] = abs_err
+
+    abs_error_df = abs_error_df.apply(pd.to_numeric)
+
+    if results_path is not None:
+        name = results_path + 'estimation_error_small_peak_proportion_'+ str(small_peak_proportion) + \
+                '_shift_diff_' + str(shift_diff) + '.csv'
+        abs_error_df.to_csv(name)
+
+    return abs_error_df
+
+
+def visualise_overlap_and_shift(abs_error_df, results_path, small_peak_proportion, shift_diff):
+
+    fig, ax = plt.subplots(figsize=(6, 5))
+
+    # Display heatmap
+    cax = ax.imshow(abs_error_df.values, cmap='RdYlGn_r', aspect='auto', vmax=1)
+
+    # Add colorbar to the figure
+    cbar = fig.colorbar(cax, ax=ax, label = 'Absolute error')
+    cbar.set_label(label='Absolute error', fontsize=15)
+
+    # Set axis ticks and labels
+    ax.set_xticks(range(len(abs_error_df.columns)))
+    ax.set_xticklabels([np.round(el, 2) for el in pd.to_numeric(abs_error_df.columns)], rotation=90)
+    ax.set_yticks(range(len(abs_error_df.index))[::10])
+    ax.set_yticklabels([np.round(el,3) for el in abs_error_df.index[::10]])
+    ax.set_xlabel("Shift", size=15)
+    ax.set_ylabel("Proportion of overlap", size=15)
+
+    # Layout adjustment
+    fig.tight_layout()
+
+    plt.savefig(results_path + 'error_heatmap_small_peak_proportion_'+ str(small_peak_proportion) + \
+                '_shift_' + str(shift_diff) + '.png')
