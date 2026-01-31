@@ -7,11 +7,20 @@ import time
 from textwrap import wrap
 from scipy.stats import cauchy
 import math
+import pickle
 
 def load_spectrum(mixture_time_data, moment_of_time):
     ppm = mixture_time_data['ppm']
     intensity = mixture_time_data['t'+str(moment_of_time)]
     sp = NMRSpectrum(confs = list(zip(ppm, intensity)))
+    return sp
+
+def load_and_normalize_spectrum(mixture_time_data, moment_of_time):
+    ppm = mixture_time_data['ppm']
+    intensity = mixture_time_data['t'+str(moment_of_time)]
+    sp = NMRSpectrum(confs = list(zip(ppm, intensity)))
+    sp.trim_negative_intensities()
+    sp.normalize()
     return sp
 
 def load_mixture_time_data(mixture_path, mixture_separator, last_columns_to_skip=2):
@@ -364,3 +373,82 @@ def visualise_overlap_and_shift(abs_error_df, results_path, small_peak_proportio
 
     plt.savefig(results_path + 'error_heatmap_small_peak_proportion_'+ str(small_peak_proportion) + \
                 '_shift_' + str(shift_diff) + '.png')
+
+def run_estimation_in_time(mixture_time_data, reagents_spectra, what_to_compare='area', MTD=0.25, MTD_th=0.22, results_path=None):
+
+    proportions_in_times = []
+    noise_proportions_in_times = []
+    noise = []
+    noise_in_components = []
+
+    for i in range(1, mixture_time_data.shape[1]):
+        print('This is timepoint '+str(i)+'.\n')
+        mix = load_and_normalize_spectrum(mixture_time_data, i)
+        mix.trim_negative_intensities()
+        mix.normalize()
+        estimation = estimate_proportions(mix, reagents_spectra, what_to_compare='area', 
+                                          solver=pulp.GUROBI(msg=False),
+                                         MTD=MTD, MTD_th=MTD_th)
+        proportions_in_times.append(estimation['proportions'])
+        noise_proportions_in_times.append(estimation['proportion_of_noise_in_components'])
+        noise.append(estimation['noise'])
+        noise_in_components.append(estimation['noise_in_components'])
+    #     if i>1:
+    #         assert estimation['common_horizontal_axis'] == common_horizontal_axis
+        common_horizontal_axis = estimation['common_horizontal_axis']
+        
+        print('Proportions:\n')
+        print(estimation['proportions'])
+        print('\n')
+        print('Proportion_of_noise_in_components:\n')
+        print(estimation['proportion_of_noise_in_components'])
+        print('\n')
+
+    if results_path is not None:
+        with open(results_path + 'proportions_in_times_'+str(MTD)+'_'+str(MTD_th)+'.pkl', 'wb') as f:
+            pickle.dump(proportions_in_times, f)
+        with open(results_path + 'noise_proportions_in_times_'+str(MTD)+'_'+str(MTD_th)+'.pkl', 'wb') as f:
+            pickle.dump(noise_proportions_in_times, f)
+        with open(results_path + 'common_horizontal_axis_'+str(MTD)+'_'+str(MTD_th)+'.pkl', 'wb') as f:
+            pickle.dump(common_horizontal_axis, f)
+        with open(results_path + 'noise_'+str(MTD)+'_'+str(MTD_th)+'.pkl', 'wb') as f:
+            pickle.dump(noise, f)
+        with open(results_path + 'noise_in_components_'+str(MTD)+'_'+str(MTD_th)+'.pkl', 'wb') as f:
+            pickle.dump(noise_in_components, f)
+
+    return proportions_in_times, noise_proportions_in_times, common_horizontal_axis, noise, noise_in_components
+
+
+def run_estimation_in_time_with_warm_start(mixture_time_data, reagents_spectra, what_to_compare='area', MTD=0.25, MTD_th=0.22, results_path=None):
+
+    proportions_in_times = []
+    noise_proportions_in_times = []
+    noise = []
+    noise_in_components = []
+
+    start_time = time.time()
+        
+    estimation = estimate_proportions_in_time(mixture_time_data.values, reagents_spectra, what_to_compare='area',
+                                                solver=pulp.GUROBI(warmStart=True, msg=False),
+                                                MTD=MTD, MTD_th=MTD_th, verbose=True)
+
+    proportions_in_times = estimation['proportions_in_time']
+    noise_proportions_in_times = estimation['proportion_of_noise_in_reagents_in_time']
+    noise = estimation['noise_in_mixture_in_time']
+    noise_in_components = estimation['noise_in_reagents_in_time']
+    common_horizontal_axis = estimation['common_horizontal_axis_in_time']
+
+
+    if results_path is not None:
+        with open(results_path + 'proportions_in_times_'+str(MTD)+'_'+str(MTD_th)+'.pkl', 'wb') as f:
+            pickle.dump(proportions_in_times, f)
+        with open(results_path + 'noise_proportions_in_times_'+str(MTD)+'_'+str(MTD_th)+'.pkl', 'wb') as f:
+            pickle.dump(noise_proportions_in_times, f)
+        with open(results_path + 'common_horizontal_axis_'+str(MTD)+'_'+str(MTD_th)+'.pkl', 'wb') as f:
+            pickle.dump(common_horizontal_axis, f)
+        with open(results_path + 'noise_'+str(MTD)+'_'+str(MTD_th)+'.pkl', 'wb') as f:
+            pickle.dump(noise, f)
+        with open(results_path + 'noise_in_components_'+str(MTD)+'_'+str(MTD_th)+'.pkl', 'wb') as f:
+            pickle.dump(noise_in_components, f)
+
+    return proportions_in_times, noise_proportions_in_times, common_horizontal_axis, noise, noise_in_components
