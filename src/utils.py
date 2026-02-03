@@ -8,6 +8,7 @@ from textwrap import wrap
 from scipy.stats import cauchy
 import math
 import pickle
+from copy import deepcopy
 
 def load_spectrum(mixture_time_data, moment_of_time):
     ppm = mixture_time_data['ppm']
@@ -421,22 +422,18 @@ def run_estimation_in_time(mixture_time_data, reagents_spectra, what_to_compare=
 
 def run_estimation_in_time_with_warm_start(mixture_time_data, reagents_spectra, what_to_compare='area', MTD=0.25, MTD_th=0.22, results_path=None):
 
-    proportions_in_times = []
-    noise_proportions_in_times = []
-    noise = []
-    noise_in_components = []
-
-    start_time = time.time()
         
-    estimation = estimate_proportions_in_time(mixture_time_data.values, reagents_spectra, what_to_compare='area',
+    estimation = estimate_proportions_in_time(mixture_time_data.values, reagents_spectra, what_to_compare=what_to_compare,
                                                 solver=pulp.GUROBI(warmStart=True, msg=False),
                                                 MTD=MTD, MTD_th=MTD_th, verbose=True)
 
-    proportions_in_times = estimation['proportions_in_time']
-    noise_proportions_in_times = estimation['proportion_of_noise_in_reagents_in_time']
-    noise = estimation['noise_in_mixture_in_time']
-    noise_in_components = estimation['noise_in_reagents_in_time']
-    common_horizontal_axis = estimation['common_horizontal_axis_in_time']
+    res = deepcopy(estimation)
+
+    proportions_in_times = res['proportions_in_time']
+    noise_proportions_in_times = res['proportion_of_noise_in_reagents_in_time']
+    noise = res['noise_in_mixture_in_time']
+    noise_in_components = res['noise_in_reagents_in_time']
+    common_horizontal_axis = res['common_horizontal_axis_in_time']
 
 
     if results_path is not None:
