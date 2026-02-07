@@ -55,7 +55,7 @@ Due to the large size of the input data, they are not stored in this repository.
 
 #### Code 
 
-The code used for preprocessing, analysis and visualisations is available in `notebooks/`. To reproduce the analysis (without warm-start), use `notebooks/estimation.ipynb`. To run the analysis with warm-start, use `notebooks/estimation_with_warm_start.ipynb`.
+The code used for preprocessing, analysis and visualisations is available in `analysis/`. To reproduce the analysis (without warm-start), use `analysis/estimation.py`. To run the analysis with warm-start, use `analysis/estimation_with_warm_start.py`. Note that the results obtained by running these scripts may be slightly different from those saved in `results/`, for example due to numerical errors or updates/randomness in Gurobi solver.
 
 #### Results
 
