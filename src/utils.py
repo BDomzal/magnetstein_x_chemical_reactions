@@ -94,6 +94,22 @@ def cut_mixture_time_data_to_regions_v2(mixture_time_data, intervals):
                             ]
     return res.values
 
+def cut_mixture_time_data_to_regions_v3(experiment_name, mixture_time_data, intervals):
+
+    data_cut_to_intervals = []
+    for interval in intervals:
+        data_in_interval = mixture_time_data[
+                                            mixture_time_data['ppm'].apply(lambda x:
+                                                                                   x>interval[0] and x<interval[1])
+                                            ]
+        data_cut_to_intervals.append(data_in_interval)
+
+    if experiment_name == 'PMG 284 monitoring':
+        data_cut_to_intervals[2] = data_cut_to_intervals[2].fillna(0.)
+
+    return data_cut_to_intervals
+
+
 def cut_ppm_axis(mixture_time_data, full_ppm_interval):
 
     res = mixture_time_data[mixture_time_data['ppm'].apply(
@@ -109,6 +125,59 @@ def preprocess_mnova_integrals(integrals_path, raw_integrals_separators, substan
     integrals.columns = substances_names
     integrals[integrals < 0] = 0
     return integrals
+
+
+def compute_integrals_in_python(experiment_name, mixture_time_data, data_cut_to_intervals):
+
+    integrals_changing_in_time = []
+    
+    for timepoint in ['t' + str(nb) for nb in range(1, mixture_time_data.shape[1])]:
+        
+        integrals_fixed_time = []
+        
+        for data_in_interval in data_cut_to_intervals:
+            
+            x_fixed_interval = data_in_interval['ppm']
+            y_fixed_interval = data_in_interval[timepoint]
+            
+            new_int = np.trapz(y = y_fixed_interval, x = x_fixed_interval)
+            integrals_fixed_time.append(new_int)
+            
+        integral_entire_spectrum = np.trapz(y = mixture_time_data[timepoint], x = mixture_time_data['ppm'])
+        integrals_fixed_time.append(integral_entire_spectrum)
+        
+        
+        integrals_changing_in_time.append(integrals_fixed_time)
+
+
+    python_integrals = np.array(integrals_changing_in_time)
+
+    if experiment_name == 'PMG 287 monitoring':
+        hexene_integral = python_integrals[:,:5].sum(axis=1).reshape(-1,1)
+        triethylsilane_integral = python_integrals[:,5:8].sum(axis=1).reshape(-1,1)
+        product_integral = python_integrals[:,8:12].sum(axis=1).reshape(-1,1)
+        whole_integral = python_integrals[:,12:13].sum(axis=1).reshape(-1,1)
+        python_integrals = np.concatenate([hexene_integral, triethylsilane_integral, product_integral, whole_integral],
+                                         axis=1)
+
+    return python_integrals
+
+def save_python_integrals(python_integrals, integration_intervals, substances_names, python_integrals_path, experiment_name):
+
+    colnames = [name + ': ' + str(tuple(interval)) for name, interval in zip(substances_names,
+                                                                integration_intervals)
+           ]
+
+
+    python_integrals_df = pd.DataFrame(python_integrals, columns=colnames + ['whole_spectrum'])
+
+
+    python_integrals_df.to_csv(python_integrals_path +
+                               'python_integral_' + 
+                               '_'.join(experiment_name.split()) + 
+                               '.csv',
+                              index=False)
+
 
 def get_time_range(experiment_name, sucrose_time_axis_path):
 
@@ -160,6 +229,27 @@ def load_mixture_time_data_v3(experiment_name, mixture_path, mixture_separator):
         ppm = mixture_time_data.iloc[:,:-1].iloc[:,0:1]
         every_10th = mixture_time_data.iloc[:,:-1].iloc[:,1:].iloc[:,::10]
         mixture_time_data = pd.concat((ppm, every_10th), axis=1)
+
+    names = ['ppm'] + ['t' + str(nb) for nb in range(1, mixture_time_data.shape[1])]
+    mixture_time_data.columns = names
+    return mixture_time_data
+
+def load_mixture_time_data_v4(experiment_name, mixture_path, mixture_separator):
+
+    mixture_time_data = pd.read_csv(mixture_path, sep = mixture_separator)
+
+    if experiment_name == 'Saccharose hydrolysis':
+        ppm = mixture_time_data.iloc[:,0:1]
+        ints = mixture_time_data.iloc[:,1:-1]
+        mixture_time_data = pd.concat((ppm, ints), axis=1)
+    elif experiment_name == 'PMG 284 monitoring':
+        ppm = mixture_time_data.iloc[:,:-2].iloc[:,0:1]
+        ints = mixture_time_data.iloc[:,:-2].iloc[:,1:]
+        mixture_time_data = pd.concat((ppm, ints), axis=1)
+    elif experiment_name == 'PMG 287 monitoring':
+        ppm = mixture_time_data.iloc[:,:-1].iloc[:,0:1]
+        ints = mixture_time_data.iloc[:,:-1].iloc[:,1:]
+        mixture_time_data = pd.concat((ppm, ints), axis=1)
 
     names = ['ppm'] + ['t' + str(nb) for nb in range(1, mixture_time_data.shape[1])]
     mixture_time_data.columns = names

@@ -95,7 +95,7 @@
 "mixture_paths_int" : {
 			"Saccharose hydrolysis": "../data/saccharose_hydrolysis/sucrose_better_baseline_constant_region_sizes.csv",
 		        "PMG 284 monitoring": "../data/PMG_284/284_edited_corrected.csv",
-		        "PMG 287 monitoring": "../data/PMG_287/preprocessed_mixture_whole.csv" 
+		        "PMG 287 monitoring": "../data/PMG_287_full_mixture_spectrum/preprocessed_mixture_whole.csv" 
 		        },
 		        
 "integrals_path" : {
