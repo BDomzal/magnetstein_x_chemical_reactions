@@ -373,7 +373,6 @@ def plot_proportion_against_time_all_components_plus_integrals(
         else:
             fig.savefig(path_to_save + 'comparison_for_different_kappas_components_separately_plus_integrals_' + python_or_mnova + '.png')
     
-    plt.tight_layout()
     plt.show()
 
 def plot_proportion_and_integrals_against_time_chosen_kappas(
@@ -560,7 +559,6 @@ def plot_proportion_and_all_integrals_against_time_chosen_kappas(
                                                         str(chosen_kappa)+'_kappa_th_' + 
                                                         str(chosen_kappa_th) +'.png')
     plt.show()
-    plt.close()
 
 
 def plot_integrals_against_time_chosen_kappas(
