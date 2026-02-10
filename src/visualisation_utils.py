@@ -200,7 +200,8 @@ def plot_proportion_against_time_single_component(
 
     if path_to_save is not None:
         fig.savefig(path_to_save + 'comparison_for_different_kappas_'+ substances_names[component_nr]+'.png')
-    fig.show()
+
+    plt.show()
 
 def plot_proportion_against_time_all_components(    
                                                 experiment_name,
@@ -274,7 +275,7 @@ def plot_proportion_against_time_all_components(
 
     if path_to_save is not None:
         fig.savefig(path_to_save + 'comparison_for_different_kappas_components_separately.png', dpi=200)
-    fig.show()
+    plt.show()
 
 
 def plot_proportion_against_time_all_components_plus_integrals(
@@ -372,7 +373,8 @@ def plot_proportion_against_time_all_components_plus_integrals(
         else:
             fig.savefig(path_to_save + 'comparison_for_different_kappas_components_separately_plus_integrals_' + python_or_mnova + '.png')
     
-    fig.show()
+    plt.tight_layout()
+    plt.show()
 
 def plot_proportion_and_integrals_against_time_chosen_kappas(
                                                             experiment_name,
@@ -488,6 +490,7 @@ def plot_proportion_against_time_chosen_kappas(
     # plt.yticks([])
      
     plt.gcf().set_size_inches(10, 5)
+    plt.legend()
 
     # for lh in leg.legendHandles[:y.shape[1]]: 
     #     lh.set_alpha(0.4)
@@ -557,6 +560,7 @@ def plot_proportion_and_all_integrals_against_time_chosen_kappas(
                                                         str(chosen_kappa)+'_kappa_th_' + 
                                                         str(chosen_kappa_th) +'.png')
     plt.show()
+    plt.close()
 
 
 def plot_integrals_against_time_chosen_kappas(
@@ -690,8 +694,7 @@ def plot_proportion_against_time_all_components_added_plus_integrals(
                         'comparison_for_different_kappas_components_together_plus_integrals_' +
                         python_or_mnova + 
                     '.png')
-    fig.show()
-
+    plt.show()
 
 def plot_proportion_against_time_chosen_components_added(
                                                         experiment_name,
@@ -744,7 +747,7 @@ def plot_proportion_against_time_chosen_components_added(
     if path_to_save is not None:
         fig.savefig(path_to_save + 'comparison_for_different_kappas_sum_of_components_' +
                                                       str(names) +'.png')
-    fig.show()
+    plt.show()
 
 def plot_proportion_against_time_single_component_chosen_kappa(
                                                                 experiment_name,
@@ -990,7 +993,7 @@ def plot_noise_proportion_against_time (
 
     if path_to_save is not None:
         fig.savefig(path_to_save + 'proportion_of_removed_signal.png')
-    fig.show()
+    plt.show()
 
 
 def visualise_signal_removed_from_mixture(
@@ -1021,9 +1024,9 @@ def visualise_signal_removed_from_mixture(
     bar_width = np.mean([cha[i]-cha[i-1] for i in range(1, len(cha))])
 
     plt.gca().invert_xaxis()
-    plt.bar(cha, noise, alpha=0.7, label='signal removed from mixture', width=bar_width);
+    plt.bar(cha, noise, alpha=0.7, label='signal removed from mixture', width=bar_width)
     plt.legend()
-    NMRSpectrum.plot_all([mix], profile=True);
+    NMRSpectrum.plot_all([mix], profile=True)
 
     if path_to_save is not None:
         plt.savefig(path_to_save + 'noise_removed_from_mixture.png')
@@ -1066,7 +1069,7 @@ def visualise_signal_removed_from_mixture_plus_reagents(
 
     bar_width = np.mean([cha[i]-cha[i-1] for i in range(1, len(cha))])
     plt.gca().invert_xaxis()
-    plt.bar(cha, noise, alpha=0.7, label='noise', width=bar_width);
+    plt.bar(cha, noise, alpha=0.7, label='noise', width=bar_width)
     plt.legend()
     NMRSpectrum.plot_all(products, profile=True)
 
@@ -1115,10 +1118,10 @@ def visualise_signal_removed_from_components(
     bar_width = np.mean([cha[i]-cha[i-1] for i in range(1, len(cha))])
 
     plt.gca().invert_xaxis()
-    plt.bar(cha, noise_in_components, alpha=0.7, label='noise in components', width=bar_width, color='grey');
+    plt.bar(cha, noise_in_components, alpha=0.7, label='noise in components', width=bar_width, color='grey')
     for i in components_nrs:
         plt.plot(np.array(reagents[i].confs)[:,0], np.array(reagents[i].confs)[:,1],
-                        color=saturated_colors_for_components[i]);
+                        color=saturated_colors_for_components[i])
     plt.legend()
     if path_to_save is not None:
         plt.savefig(path_to_save + 'noise_removed_from_components.png')
