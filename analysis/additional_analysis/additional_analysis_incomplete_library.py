@@ -36,7 +36,7 @@ kappa = 0.1
 kappa_th = 1
 
 
-for nr in [None]:
+for nr in [None, 0, 1, 2, 3]:
 
     which_reagent_to_remove = nr
 
