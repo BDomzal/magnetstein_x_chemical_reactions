@@ -7,6 +7,9 @@ Magnetstein is available [here](https://github.com/BDomzal/magnetstein). The fun
 
 ## About the method
 
+![A-Hydrosilylation-reaction-of-1-hexene-and-triethylsilane-in-1-2-difluorobenzene-with_W640](https://github.com/user-attachments/assets/e4a92b32-8e64-4f4f-a212-1ee1f876d056)
+
+
 #### When to use Magnetstein instead of traditional integration methods
 
 The method should be used when:
