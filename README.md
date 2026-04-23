@@ -1,4 +1,4 @@
-# <img src="https://github.com/user-attachments/assets/008fa262-7fa1-458c-a8fc-f4f6e3a2022a" align="left" height="80" width="60"/> Chemical reactions analysis using Magnetstein
+# <img src="https://github.com/user-attachments/assets/008fa262-7fa1-458c-a8fc-f4f6e3a2022a" align="left" style="width:6%; height:auto;"> Chemical reactions analysis using Magnetstein
 ![main_workflow_final](https://github.com/BDomzal/magnetstein_x_chemical_reactions/blob/main/main_figure.png)
 
 This repository contains the code for the analysis of chemical reaction kinetics using nuclear magnetic resonance (NMR) spectra and the Magnetstein algorithm. 
