@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import pickle
-from masserstein import NMRSpectrum
+from magnetstein import NMRSpectrum
 from utils import load_mixture_time_data_v3, load_spectrum, load_and_normalize_spectrum
 
 

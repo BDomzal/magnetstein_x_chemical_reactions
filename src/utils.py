@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from masserstein import NMRSpectrum, estimate_proportions, estimate_proportions_in_time
+from magnetstein import NMRSpectrum, estimate_proportions, estimate_proportions_in_time
 import pulp
 import time
 from textwrap import wrap

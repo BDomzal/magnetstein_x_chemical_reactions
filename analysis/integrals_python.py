@@ -36,7 +36,7 @@ INTEGRATION_INTERVALS = config["integration_intervals"][experiment_name]
 
 import sys
 sys.path.insert(0, MAGNETSTEIN_PATH)
-from masserstein import NMRSpectrum, estimate_proportions
+from magnetstein import NMRSpectrum, estimate_proportions
 
 
 # ### Data
